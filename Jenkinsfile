@@ -12,6 +12,20 @@ pipeline {
             sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
          }
+       }
+
+      stage('Test') {
+         steps {
+               // Run Maven on a Unix agent.
+            sh "mvn test"
+         }
+
+		 post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+
       }
     }
 }
