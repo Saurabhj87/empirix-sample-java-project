@@ -4,6 +4,9 @@ pipeline {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"
    }
+   parameters {
+   	     string(defaultValue: "/tmp", description: 'What environment?', name: 'folderPath')
+	}
    stages {
 
       stage('Build') {
@@ -33,4 +36,10 @@ pipeline {
          }
       }
     }
+    post {
+         success {
+        	   archiveArtifacts 'target/*.jar'
+		   copyArtifacts(projectName: 'Saurabh-java-project', selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}'], target: "${params.folderPath}/$BUILD_TIMESTAMP" );
+			}
+		}
 }
