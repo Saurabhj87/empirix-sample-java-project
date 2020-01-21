@@ -26,6 +26,11 @@ pipeline {
                 }
             }
 
+       }
+      stage('Deploy') {
+         steps {
+		sh "java -jar /var/lib/jenkins/workspace/Saurabh-java-project/target/my-app-1.0-SNAPSHOT.jar"
+         }
       }
     }
 }
