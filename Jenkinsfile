@@ -7,7 +7,8 @@ pipeline {
    parameters {
    	     string(defaultValue: "/tmp", description: 'What environment?', name: 'folderPath')
 	}
-   stages {
+
+stages {
 
       stage('Build') {
          steps {
